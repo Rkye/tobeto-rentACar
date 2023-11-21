@@ -1,9 +1,18 @@
 package com.spring.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Table(name="cars")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Car {
 
     @Id
@@ -27,9 +36,9 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
+    @JsonIgnore
     private Brand brand;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @OneToMany(mappedBy = "car")
+    private List<Order> orders;
 }

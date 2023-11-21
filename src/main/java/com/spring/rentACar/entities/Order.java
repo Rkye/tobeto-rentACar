@@ -1,5 +1,6 @@
 package com.spring.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,13 +30,15 @@ public class Order {
     @Column(name = "payment_type")
     private String paymentType;
 
-    @OneToMany(mappedBy = "order")
-    List<Car> cars;
-
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
     //TODO one-to-one (Order - Bill)
+
+    @ManyToOne
+    @JoinColumn(name = "car_id")
+    @JsonIgnore
+    private Car car;
 
 }
