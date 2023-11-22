@@ -28,12 +28,10 @@ public class Bill {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
     @ManyToOne
     @JoinColumn(name = "address_id")
-    @JsonIgnore
     private Address address;
 
     //TODO one-to-one (Bill - Order)

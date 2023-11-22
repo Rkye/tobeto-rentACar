@@ -24,10 +24,10 @@ public class County {
     private String name;
 
     @OneToMany(mappedBy = "county")
+    @JsonIgnore
     List<Address> addresses;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 }

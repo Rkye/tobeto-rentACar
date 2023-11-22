@@ -36,9 +36,9 @@ public class Car {
 
     @ManyToOne
     @JoinColumn(name = "brand_id")
-    @JsonIgnore
     private Brand brand;
 
     @OneToMany(mappedBy = "car")
+    @JsonIgnore
     private List<Order> orders;
 }

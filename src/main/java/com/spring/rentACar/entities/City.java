@@ -1,5 +1,6 @@
 package com.spring.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,9 +24,11 @@ public class City {
     private String name;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     List<Address> adresses;
 
     @OneToMany(mappedBy = "city")
+    @JsonIgnore
     List<County> counties;
 
 }

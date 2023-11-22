@@ -28,20 +28,18 @@ public class Address {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    @JsonIgnore
     private City city;
 
     @ManyToOne
     @JoinColumn(name = "county_id")
-    @JsonIgnore
     private County county;
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
-    @JsonIgnore
     private Customer customer;
 
     @OneToMany(mappedBy = "address")
+    @JsonIgnore
     List<Bill> bills;
 
 }

@@ -1,5 +1,6 @@
 package com.spring.rentACar.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -38,12 +39,15 @@ public class Customer {
     private String email;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     List<Address> addresses;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     List<Bill> bills;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     List<Order> orders;
 
 
