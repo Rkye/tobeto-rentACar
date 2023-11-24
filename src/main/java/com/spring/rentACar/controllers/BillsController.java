@@ -1,9 +1,14 @@
 package com.spring.rentACar.controllers;
 
+import com.spring.rentACar.dtos.requests.bill.AddBillRequest;
+import com.spring.rentACar.dtos.requests.bill.UpdateBillRequest;
+import com.spring.rentACar.dtos.responses.bill.GetBillListResponse;
+import com.spring.rentACar.dtos.responses.bill.GetBillResponse;
 import com.spring.rentACar.entities.Bill;
 import com.spring.rentACar.repositories.BillRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -16,27 +21,40 @@ public class BillsController {
     }
 
     @GetMapping
-    public List<Bill> getAll(){
-        return billRepository.findAll();
+    public List<GetBillListResponse> getAll(){
+        List<Bill> bills = billRepository.findAll();
+        List<GetBillListResponse> getBillListResponses = new ArrayList<>();
+        for (Bill bill:bills) {
+            GetBillListResponse getBillListResponse = new GetBillListResponse();
+            getBillListResponse.setDate(bill.getDate());
+            getBillListResponse.setPrice(bill.getPrice());
+            getBillListResponses.add(getBillListResponse);
+        }
+        return getBillListResponses;
     }
 
     @GetMapping("{id}")
-    public Bill getById(@PathVariable int id){
-        return billRepository.findById(id).orElseThrow();
+    public GetBillResponse getById(@PathVariable int id){
+        Bill bill = billRepository.findById(id).orElseThrow();
+        GetBillResponse getBillResponse = new GetBillResponse();
+        getBillResponse.setDate(bill.getDate());
+        getBillResponse.setPrice(bill.getPrice());
+        return getBillResponse;
     }
 
     @PostMapping
-    public void add(@RequestBody Bill bill){
+    public void add(@RequestBody AddBillRequest addBillRequest){
+        Bill bill = new Bill();
+        bill.setDate(addBillRequest.getDate());
+        bill.setPrice(addBillRequest.getPrice());
         billRepository.save(bill);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable int id, @RequestBody Bill bill){
+    public void update(@PathVariable int id, @RequestBody UpdateBillRequest updateBillRequest){
         Bill billToUpdate = billRepository.findById(id).orElseThrow();
-            billToUpdate.setAddress(bill.getAddress());
-            billToUpdate.setDate(bill.getDate());
-            billToUpdate.setCustomer(bill.getCustomer());
-            billToUpdate.setPrice(bill.getPrice());
+            billToUpdate.setDate(updateBillRequest.getDate());
+            billToUpdate.setPrice(updateBillRequest.getPrice());
         billRepository.save(billToUpdate);
     }
 

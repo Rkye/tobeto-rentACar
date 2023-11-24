@@ -1,5 +1,9 @@
 package com.spring.rentACar.controllers;
 
+import com.spring.rentACar.dtos.requests.address.AddAddressRequest;
+import com.spring.rentACar.dtos.requests.address.UpdateAddressRequest;
+import com.spring.rentACar.dtos.responses.address.GetAddressListResponse;
+import com.spring.rentACar.dtos.responses.address.GetAddressResponse;
 import com.spring.rentACar.entities.Address;
 import com.spring.rentACar.repositories.AddressRepository;
 import lombok.AllArgsConstructor;
@@ -7,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,30 +25,46 @@ public class AddressesController {
     }
 
     @GetMapping
-    public List<Address> getAll(){
-        return addressRepository.findAll();
+    public List<GetAddressListResponse> getAll(){
+        List<Address> Addresses= addressRepository.findAll();
+        List<GetAddressListResponse> getAddressListResponses = new ArrayList<>();
+        for (Address address:Addresses) {
+            GetAddressListResponse getAddressListResponse = new GetAddressListResponse();
+            getAddressListResponse.setAddressText(address.getAddressText());
+            getAddressListResponse.setPostalCode(address.getPostalCode());
+            getAddressListResponses.add(getAddressListResponse);
+        }
+        return getAddressListResponses;
     }
 
     @GetMapping("{id}")
-    public Address getById(@PathVariable int id){
-        return addressRepository.findById(id).orElseThrow();
+    public GetAddressResponse getById(@PathVariable int id){
+        Address address = addressRepository.findById(id).orElseThrow();
+        GetAddressResponse getAddressResponse = new GetAddressResponse();
+        getAddressResponse.setAddressText(address.getAddressText());
+        getAddressResponse.setPostalCode(address.getPostalCode());
+        getAddressResponse.setCountyName(address.getCounty().getName());
+        getAddressResponse.setCityName(address.getCounty().getCity().getName());
+        return getAddressResponse;
     }
 
     @PostMapping
-    public void add(@RequestBody Address address){
+    public void add(@RequestBody AddAddressRequest addAddressRequest){
+        Address address = new Address();
+        address.setPostalCode(addAddressRequest.getPostalCode());
+        address.setAddressText(addAddressRequest.getAddressText());
+        address.setCounty(addAddressRequest.getCounty());
         addressRepository.save(address);
     }
 
     @PutMapping("{id}")
-    public void update(@PathVariable int id,@RequestBody Address address){
+    public void update(@PathVariable int id, @RequestBody UpdateAddressRequest updateAddressRequest){
         Address addressToUpdate = addressRepository.findById(id).orElseThrow();
-            addressToUpdate.setAddressText(address.getAddressText());
-            addressToUpdate.setCity(address.getCity());
-            addressToUpdate.setBills(address.getBills());
-            addressToUpdate.setCounty(address.getCounty());
-            addressToUpdate.setCustomer(address.getCustomer());
-            addressToUpdate.setPostalCode(address.getPostalCode());
+            addressToUpdate.setAddressText(updateAddressRequest.getAddressText());
+            addressToUpdate.setPostalCode(updateAddressRequest.getPostalCode());
+            addressToUpdate.setCounty(updateAddressRequest.getCounty());
         addressRepository.save(addressToUpdate);
+
     }
 
     @DeleteMapping("{id}")

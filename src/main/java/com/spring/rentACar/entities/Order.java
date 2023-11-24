@@ -2,12 +2,18 @@ package com.spring.rentACar.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
 @Table(name = "orders")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
 
     @Id
