@@ -31,6 +31,16 @@ public class CountiesController {
         return countyService.getById(id);
     }
 
+    @GetMapping("getByNameNotLike")
+    public List<GetCountyListResponse> getByNameNotLike(String name){
+        return countyService.getByNameNotLike(name);
+    }
+
+    @GetMapping("getByName")
+    public List<GetCountyListResponse> getByName(String name){
+        return countyService.getByName(name);
+    }
+
     @PostMapping
     public void add(@RequestBody AddCountyRequest addCountyRequest){
         countyService.add(addCountyRequest);
@@ -44,6 +54,16 @@ public class CountiesController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
         countyService.delete(id);
+    }
+
+    @GetMapping("getByIdJPQL/{id}")
+    public GetCountyResponse getByIdJPQL(@PathVariable int id){
+        return countyService.getByIdQuery(id);
+    }
+
+    @GetMapping("getNameStartsWithJPQL")
+    public List<GetCountyListResponse> getNameStartsWithJPQL(String name){
+        return countyService.getNameStartsWith(name);
     }
 
 }

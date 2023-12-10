@@ -30,6 +30,16 @@ public class CarsController {
         return carService.getById(id);
     }
 
+    @GetMapping("getByModelNameContain")
+    public List<GetCarListResponse> getByModelNameContain(String modelName){
+        return carService.getModelNameContain(modelName);
+    }
+
+    @GetMapping("getModelYearIsNot")
+    public List<GetCarListResponse> getModelYearIsNot(int year){
+        return carService.getModelYearIsNot(year);
+    }
+
     @PostMapping
     public void add(@RequestBody AddCarRequest addCarRequest){
         carService.add(addCarRequest);
@@ -43,6 +53,16 @@ public class CarsController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
         carService.delete(id);
+    }
+
+    @GetMapping("getByModelGreaterThanYearJPQL")
+    public List<GetCarListResponse> getByModelGreaterThanYearJPQL(int year){
+        return carService.getByModelGreaterThanYear(year);
+    }
+
+    @GetMapping("getByModelNameLessThanPriceJPQL")
+    public List<GetCarListResponse> getByModelNameLessThanPriceJPQL(double price){
+        return carService.getByModelNameLessThanPrice(price);
     }
 
 

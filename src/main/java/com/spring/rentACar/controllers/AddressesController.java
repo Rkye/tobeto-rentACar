@@ -31,6 +31,18 @@ public class AddressesController {
         return addressService.getById(id);
     }
 
+    @GetMapping("getPostalCodeEquals")
+    public List<GetAddressListResponse> getPostalCodeEquals(String postalCode){
+        return addressService.getPostalCodeEquals(postalCode);
+    }
+
+
+
+    @GetMapping("getPostalCodeNull")
+    public List<GetAddressListResponse> getPostalCodeNull(){
+        return addressService.getPostalCodeIsNull();
+    }
+
     @PostMapping
     public void add(@RequestBody AddAddressRequest addAddressRequest){
         addressService.add(addAddressRequest);
@@ -45,6 +57,16 @@ public class AddressesController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
         addressService.delete(id);
+    }
+
+    @GetMapping("getAllJPQL")
+    public List<GetAddressListResponse> getAllQuery(){
+        return addressService.getAllAddressQuery();
+    }
+
+    @GetMapping("getByIdJPQL/{id}")
+    public GetAddressResponse getByIdJPQL(@PathVariable int id){
+        return addressService.getByIdJPQL(id);
     }
 
 }

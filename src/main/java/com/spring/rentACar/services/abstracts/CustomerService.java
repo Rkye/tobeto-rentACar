@@ -13,4 +13,8 @@ public interface CustomerService {
     List<GetCustomerListResponse> getAll();
     void update(int id, UpdateCustomerRequest updateCustomerRequest);
     void delete(int id);
+    List<GetCustomerListResponse> getByAgeLessThan(int age);
+    List<GetCustomerListResponse> getByAgeOrderBySurnameDesc(int age);
+    List<GetCustomerListResponse> getByCustomerGreaterThanAge(int age);
+    GetCustomerResponse getByIdJPQL(int id);
 }

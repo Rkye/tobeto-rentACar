@@ -11,6 +11,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class GetOrderListResponse {
     private LocalDate date;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private double totalPrice;
+    private String paymentType;
 
 }

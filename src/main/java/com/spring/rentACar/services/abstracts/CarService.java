@@ -13,4 +13,8 @@ public interface CarService {
     List<GetCarListResponse> getAll();
     GetCarResponse getById(int id);
     void delete(int id);
+    List<GetCarListResponse> getModelNameContain(String modelName);
+    List<GetCarListResponse> getModelYearIsNot(int year);
+    List<GetCarListResponse> getByModelGreaterThanYear(int year);
+    List<GetCarListResponse> getByModelNameLessThanPrice(double price);
 }

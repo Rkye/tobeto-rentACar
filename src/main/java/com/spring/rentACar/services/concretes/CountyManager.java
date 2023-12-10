@@ -5,6 +5,7 @@ import com.spring.rentACar.repositories.CountyRepository;
 import com.spring.rentACar.services.abstracts.CountyService;
 import com.spring.rentACar.services.dtos.requests.county.AddCountyRequest;
 import com.spring.rentACar.services.dtos.requests.county.UpdateCountyRequest;
+import com.spring.rentACar.services.dtos.responses.city.GetCityResponse;
 import com.spring.rentACar.services.dtos.responses.county.GetCountyListResponse;
 import com.spring.rentACar.services.dtos.responses.county.GetCountyResponse;
 import lombok.AllArgsConstructor;
@@ -32,7 +33,7 @@ public class CountyManager implements CountyService {
         County county = countyRepository.findById(id).orElseThrow();
         GetCountyResponse getCountyResponse = new GetCountyResponse();
         getCountyResponse.setName(county.getName());
-        getCountyResponse.setCityName(county.getCity().getName());
+        //getCountyResponse.setCityResponse();
         return getCountyResponse;
     }
 
@@ -59,5 +60,35 @@ public class CountyManager implements CountyService {
     @Override
     public void delete(int id) {
         countyRepository.deleteById(id);
+    }
+
+    @Override
+    public List<GetCountyListResponse> getByNameNotLike(String name) {
+        List<County> counties = countyRepository.findByNameNotLike(name);
+        List<GetCountyListResponse> responses = new ArrayList<>();
+        for (County county : counties){
+            responses.add(new GetCountyListResponse(county.getName()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetCountyListResponse> getByName(String name) {
+        List<County> counties = countyRepository.findByName(name);
+        List<GetCountyListResponse> responses = new ArrayList<>();
+        for (County county : counties){
+            responses.add(new GetCountyListResponse(county.getName()));
+        }
+        return responses;
+    }
+
+    @Override
+    public GetCountyResponse getByIdQuery(int id) {
+        return countyRepository.getByIdQuery(id);
+    }
+
+    @Override
+    public List<GetCountyListResponse> getNameStartsWith(String name) {
+        return countyRepository.getNameStartsWith(name);
     }
 }

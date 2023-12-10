@@ -30,7 +30,7 @@ public class Address {
     @JoinColumn(name = "city_id")
     private City city;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "county_id")
     private County county;
 

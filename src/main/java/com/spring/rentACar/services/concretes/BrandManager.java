@@ -57,4 +57,36 @@ public class BrandManager implements BrandService {
     public void delete(int id) {
         brandRepository.deleteById(id);
     }
+
+    @Override
+    public List<GetBrandListResponse> getByName(String name) {
+        List<Brand> brandList = brandRepository.findByNameLike("%" + name + "%");
+        List<GetBrandListResponse> responses = new ArrayList<>();
+        for (Brand brand : brandList){
+            responses.add(new GetBrandListResponse(brand.getName()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetBrandListResponse> getOrderByName(String name) {
+        List<Brand> brands = brandRepository.findByNameOrderByNameDesc(name);
+        List<GetBrandListResponse> responses = new ArrayList<>();
+        for (Brand brand : brands){
+            responses.add(new GetBrandListResponse(brand.getName()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetBrandListResponse> getByNameOrderBy() {
+        return brandRepository.getByNameOrderBy();
+    }
+
+    @Override
+    public List<GetBrandListResponse> getByNameLike(String name) {
+        return brandRepository.getByNameLike(name);
+    }
+
+
 }

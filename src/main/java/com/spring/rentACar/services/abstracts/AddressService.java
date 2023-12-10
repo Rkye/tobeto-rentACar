@@ -13,4 +13,8 @@ public interface AddressService {
     List<GetAddressListResponse> getAll();
     void update(int id, UpdateAddressRequest updateAddressRequest);
     void delete(int id);
+    List<GetAddressListResponse> getPostalCodeEquals(String postalCode);
+    List<GetAddressListResponse> getPostalCodeIsNull();
+    List<GetAddressListResponse> getAllAddressQuery();
+    GetAddressResponse getByIdJPQL(int id);
 }

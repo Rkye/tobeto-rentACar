@@ -31,6 +31,16 @@ public class CitiesController {
         return cityService.getById(id);
     }
 
+    @GetMapping("getCityStartingWith")
+    public List<GetCityListResponse> getCityStartingWith(String prefix){
+        return cityService.getByNameStartingWith(prefix);
+    }
+
+    @GetMapping("getNameNotNull")
+    public List<GetCityListResponse> getByNameNotNull(){
+        return cityService.getByNameNotNull();
+    }
+
     @PostMapping
     public void add(@RequestBody AddCityRequest addCityRequest){
         cityService.add(addCityRequest);
@@ -41,9 +51,18 @@ public class CitiesController {
         cityService.update(id, updateCityRequest);
     }
 
-
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
         cityService.delete(id);
+    }
+
+    @GetMapping("getByNameEndsWithJPQL")
+    public List<GetCityListResponse> getByNameEndsWithJPQL(String name){
+        return cityService.getByNameEndsWith(name);
+    }
+
+    @GetMapping("getNameLengthGreaterThanJPQL")
+    public List<GetCityListResponse> getNameLengthGreaterThanJPQL(int length){
+        return cityService.getNameLengthGreaterThan(length);
     }
 }

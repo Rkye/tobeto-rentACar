@@ -10,6 +10,7 @@ import com.spring.rentACar.services.dtos.responses.bill.GetBillResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -59,5 +60,35 @@ public class BillManager implements BillService {
     @Override
     public void delete(int id) {
         billRepository.deleteById(id);
+    }
+
+    @Override
+    public List<GetBillListResponse> getDateGreaterThan(LocalDate date) {
+        List<Bill> bills = billRepository.findByDateGreaterThanEqual(date);
+        List<GetBillListResponse> getBillListResponses = new ArrayList<>();
+        for (Bill bill : bills){
+            getBillListResponses.add(new GetBillListResponse(bill.getDate(),bill.getPrice()));
+        }
+        return getBillListResponses;
+    }
+
+    @Override
+    public List<GetBillListResponse> getByDateOrderByPrice(LocalDate date) {
+        List<Bill> bills = billRepository.findByDateOrderByPriceDesc(date);
+        List<GetBillListResponse> responses = new ArrayList<>();
+        for (Bill bill : bills){
+            responses.add(new GetBillListResponse(bill.getDate(),bill.getPrice()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetBillListResponse> getAllJPQL() {
+        return billRepository.getAllJPQL();
+    }
+
+    @Override
+    public List<GetBillListResponse> getByDate(LocalDate date) {
+        return billRepository.getByDateJPQL(date);
     }
 }

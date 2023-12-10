@@ -10,6 +10,7 @@ import com.spring.rentACar.repositories.BillRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,21 @@ public class BillsController {
         return billService.getById(id);
     }
 
+    @GetMapping("getBillDateGreaterThan")
+    public List<GetBillListResponse> getBillDateGreaterThan(LocalDate date){
+        return billService.getDateGreaterThan(date);
+    }
+
+    @GetMapping("getByDateOrderByPrice")
+    public List<GetBillListResponse> getByDateOrderByPrice(LocalDate date){
+        return billService.getByDateOrderByPrice(date);
+    }
+
+    @GetMapping("getByDateJPQL")
+    public List<GetBillListResponse> getByDateJPQL(LocalDate date){
+        return billService.getByDate(date);
+    }
+
     @PostMapping
     public void add(@RequestBody AddBillRequest addBillRequest){
         billService.add(addBillRequest);
@@ -43,5 +59,12 @@ public class BillsController {
     public void delete(@PathVariable int id){
         billService.delete(id);
     }
+
+    @GetMapping("getAllJPQL")
+    public List<GetBillListResponse> getAllJPQL(){
+        return billService.getAllJPQL();
+    }
+
+
 
 }

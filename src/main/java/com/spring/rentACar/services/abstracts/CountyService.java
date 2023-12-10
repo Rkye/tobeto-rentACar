@@ -14,4 +14,8 @@ public interface CountyService {
     List<GetCountyListResponse> getAll();
     void update(int id, UpdateCountyRequest updateCountyRequest);
     void delete(int id);
+    List<GetCountyListResponse> getByNameNotLike(String name);
+    List<GetCountyListResponse> getByName(String name);
+    GetCountyResponse getByIdQuery(int id);
+    List<GetCountyListResponse> getNameStartsWith(String name);
 }

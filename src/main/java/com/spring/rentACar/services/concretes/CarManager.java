@@ -71,4 +71,34 @@ public class CarManager implements CarService {
     public void delete(int id) {
         carRepository.deleteById(id);
     }
+
+    @Override
+    public List<GetCarListResponse> getModelNameContain(String modelName) {
+        List<Car> cars = carRepository.findByModelNameContaining(modelName);
+        List<GetCarListResponse> responses = new ArrayList<>();
+        for (Car car : cars){
+            responses.add(new GetCarListResponse(car.getModelYear(), car.getModelName(), car.getPrice()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetCarListResponse> getModelYearIsNot(int year) {
+        List<Car> cars = carRepository.findByModelYearIsNot(year);
+        List<GetCarListResponse> responses = new ArrayList<>();
+        for (Car car : cars){
+            responses.add(new GetCarListResponse(car.getModelYear(), car.getModelName(), car.getPrice()));
+        }
+        return responses;
+    }
+
+    @Override
+    public List<GetCarListResponse> getByModelGreaterThanYear(int year) {
+        return carRepository.getByModelGreaterThanYear(year);
+    }
+
+    @Override
+    public List<GetCarListResponse> getByModelNameLessThanPrice(double price) {
+        return carRepository.getByModelNameLessThanPrice(price);
+    }
 }

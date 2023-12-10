@@ -10,7 +10,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddOrderRequest {
+    private LocalDate date;
     private LocalDate startDate;
     private LocalDate endDate;
+    private double totalPrice;
     private String paymentType;
 }

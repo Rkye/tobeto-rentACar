@@ -30,6 +30,16 @@ public class CustomersController {
         return customerService.getById(id);
     }
 
+    @GetMapping("getAgeLessThan")
+    public List<GetCustomerListResponse> getAgeLessThan(int age){
+        return customerService.getByAgeLessThan(age);
+    }
+
+    @GetMapping("getByAgeOrderBySurnameDesc")
+    public List<GetCustomerListResponse> getByAgeOrderBySurnameDesc(int age){
+        return customerService.getByAgeOrderBySurnameDesc(age);
+    }
+
     @PostMapping
     public void add(@RequestBody AddCustomerRequest addCustomerRequest){
         customerService.add(addCustomerRequest);
@@ -43,5 +53,15 @@ public class CustomersController {
     @DeleteMapping("{id}")
     public void delete(@PathVariable int id){
         customerService.delete(id);
+    }
+
+    @GetMapping("getByCustomerGreaterThanAgeJPQL")
+    public List<GetCustomerListResponse> getByCustomerGreaterThanAgeJPQL(int age){
+        return customerService.getByCustomerGreaterThanAge(age);
+    }
+
+    @GetMapping("getByIdJPQL/{id}")
+    public GetCustomerResponse getByIdJPQL(int id){
+        return customerService.getByIdJPQL(id);
     }
 }

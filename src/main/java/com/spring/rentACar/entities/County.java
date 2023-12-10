@@ -27,7 +27,7 @@ public class County {
     @JsonIgnore
     List<Address> addresses;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id")
     private City city;
 }
