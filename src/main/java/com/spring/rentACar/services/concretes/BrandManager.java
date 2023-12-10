@@ -19,8 +19,14 @@ public class BrandManager implements BrandService {
 
     private final BrandRepository brandRepository;
 
+
+
     @Override
     public void add(AddBrandRequest addBrandRequest) {
+
+        if(brandRepository.existsByName(addBrandRequest.getName().trim()))
+            throw new RuntimeException("Aynı isimle iki marka eklenemez.");
+
         Brand brand = new Brand();
         brand.setName(addBrandRequest.getName());
         brandRepository.save(brand);

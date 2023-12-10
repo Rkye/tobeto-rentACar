@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.customer.GetCustomerListRespo
 import com.spring.rentACar.services.dtos.responses.customer.GetCustomerResponse;
 import com.spring.rentACar.entities.Customer;
 import com.spring.rentACar.repositories.CustomerRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -41,7 +42,7 @@ public class CustomersController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddCustomerRequest addCustomerRequest){
+    public void add(@RequestBody @Valid AddCustomerRequest addCustomerRequest){
         customerService.add(addCustomerRequest);
     }
 

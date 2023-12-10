@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.bill.GetBillListResponse;
 import com.spring.rentACar.services.dtos.responses.bill.GetBillResponse;
 import com.spring.rentACar.entities.Bill;
 import com.spring.rentACar.repositories.BillRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,7 @@ public class BillsController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddBillRequest addBillRequest){
+    public void add(@RequestBody @Valid AddBillRequest addBillRequest){
         billService.add(addBillRequest);
     }
 

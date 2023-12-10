@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
 @Service
 @AllArgsConstructor
 public class BillManager implements BillService {
@@ -21,6 +23,7 @@ public class BillManager implements BillService {
 
     @Override
     public void add(AddBillRequest addBillRequest) {
+
         Bill bill = new Bill();
         bill.setDate(addBillRequest.getDate());
         bill.setPrice(addBillRequest.getPrice());

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class CityManager implements CityService {
 
     @Override
     public void add(AddCityRequest addCityRequest) {
+
+        if(!Pattern.matches("[a-zA-Z]+",addCityRequest.getName()))
+            throw new RuntimeException("Sadece harf girilmeli.");
+
         City city = new City();
         city.setName(addCityRequest.getName());
         cityRepository.save(city);

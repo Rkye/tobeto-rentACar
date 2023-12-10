@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class CarManager implements CarService {
 
     @Override
     public void add(AddCarRequest addCarRequest) {
+
+        if(!Pattern.matches("[a-zA-Z]+",addCarRequest.getColor()))
+            throw new RuntimeException("Sadece harf girilmeli.");
+
         Car car = new Car();
         car.setColor(addCarRequest.getColor());
         car.setModelName(addCarRequest.getModelName());

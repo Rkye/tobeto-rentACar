@@ -10,10 +10,13 @@ import com.spring.rentACar.services.dtos.responses.address.GetAddressResponse;
 import com.spring.rentACar.services.dtos.responses.city.GetCityResponse;
 import com.spring.rentACar.services.dtos.responses.county.GetCountyResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.core.type.filter.RegexPatternTypeFilter;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
+
 @Service
 @AllArgsConstructor
 public class AddressManager implements AddressService {
@@ -22,6 +25,10 @@ public class AddressManager implements AddressService {
 
     @Override
     public void add(AddAddressRequest addAddressRequest) {
+
+        if(!Pattern.matches("[0-9]+",addAddressRequest.getPostalCode()) || addAddressRequest.getPostalCode().length() != 5)
+            throw new RuntimeException("Sadece rakam girilmeli.");
+
         Address address = new Address();
         address.setPostalCode(addAddressRequest.getPostalCode());
         address.setAddressText(addAddressRequest.getAddressText());

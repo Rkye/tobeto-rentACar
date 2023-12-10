@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.city.GetCityListResponse;
 import com.spring.rentACar.services.dtos.responses.city.GetCityResponse;
 import com.spring.rentACar.entities.City;
 import com.spring.rentACar.repositories.CityRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class CitiesController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddCityRequest addCityRequest){
+    public void add(@RequestBody @Valid AddCityRequest addCityRequest){
         cityService.add(addCityRequest);
     }
 

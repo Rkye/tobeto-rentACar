@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.order.GetOrderListResponse;
 import com.spring.rentACar.services.dtos.responses.order.GetOrderResponse;
 import com.spring.rentACar.entities.Order;
 import com.spring.rentACar.repositories.OrderRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class OrdersController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddOrderRequest addOrderRequest){
+    public void add(@RequestBody @Valid AddOrderRequest addOrderRequest){
         orderService.add(addOrderRequest);
     }
 

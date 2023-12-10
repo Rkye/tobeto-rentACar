@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -22,6 +23,10 @@ public class CountyManager implements CountyService {
 
     @Override
     public void add(AddCountyRequest addCountyRequest) {
+
+        if(!Pattern.matches("[a-zA-Z]+",addCountyRequest.getName()))
+            throw new RuntimeException("Sadece harf girilmeli.");
+
         County county = new County();
         county.setName(addCountyRequest.getName());
         county.setCity(addCountyRequest.getCity());

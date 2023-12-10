@@ -39,7 +39,7 @@ public class BrandsController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddBrandRequest addBrandRequest){
+    public void add(@RequestBody @Valid AddBrandRequest addBrandRequest){
         brandService.add(addBrandRequest);
     }
 

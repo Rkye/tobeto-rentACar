@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddBrandRequest {
-   // @NotBlank(message = "Marka adı boş geçilemez.")
-   // @Size(min = 3, max =20, message = "Marka adı 3 ile 20 hane arasında olmalıdır.")
+    @NotBlank(message = "Marka adı boş geçilemez.")
+    @Size(min = 3, max =20, message = "Marka adı 3 ile 20 hane arasında olmalıdır.")
     private String name;
 }

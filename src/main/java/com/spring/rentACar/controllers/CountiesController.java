@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.county.GetCountyListResponse;
 import com.spring.rentACar.services.dtos.responses.county.GetCountyResponse;
 import com.spring.rentACar.entities.County;
 import com.spring.rentACar.repositories.CountyRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,7 +43,7 @@ public class CountiesController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddCountyRequest addCountyRequest){
+    public void add(@RequestBody @Valid AddCountyRequest addCountyRequest){
         countyService.add(addCountyRequest);
     }
 

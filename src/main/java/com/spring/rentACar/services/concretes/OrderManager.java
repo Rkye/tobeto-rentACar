@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class OrderManager implements OrderService {
 
     @Override
     public void add(AddOrderRequest addOrderRequest) {
+
+        if(!Pattern.matches("[a-zA-Z]+",addOrderRequest.getPaymentType()))
+            throw new RuntimeException("Rakam girilemez.");
+
         Order order = new Order();
         order.setDate(addOrderRequest.getDate());
         order.setStartDate(addOrderRequest.getStartDate());

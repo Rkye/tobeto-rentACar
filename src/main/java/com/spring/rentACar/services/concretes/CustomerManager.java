@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 @AllArgsConstructor
@@ -21,6 +22,10 @@ public class CustomerManager implements CustomerService {
 
     @Override
     public void add(AddCustomerRequest addCustomerRequest) {
+
+        if(!Pattern.matches("[0-9]+",addCustomerRequest.getTcNo()) || addCustomerRequest.getTcNo().length() != 11)
+            throw new RuntimeException("Sadece 11 hane ve rakam girilmeli.");
+
         Customer customer = new Customer();
         customer.setAge(addCustomerRequest.getAge());
         customer.setName(addCustomerRequest.getName());

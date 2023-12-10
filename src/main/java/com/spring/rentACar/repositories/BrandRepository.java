@@ -2,12 +2,15 @@ package com.spring.rentACar.repositories;
 
 import com.spring.rentACar.entities.Brand;
 import com.spring.rentACar.services.dtos.responses.brand.GetBrandListResponse;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface BrandRepository extends JpaRepository<Brand, Integer> {
+
+    boolean existsByName(String name);
 
     // Derived Query Method - 1
     List<Brand> findByNameLike(String name);

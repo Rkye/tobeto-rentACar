@@ -7,6 +7,7 @@ import com.spring.rentACar.services.dtos.responses.address.GetAddressListRespons
 import com.spring.rentACar.services.dtos.responses.address.GetAddressResponse;
 import com.spring.rentACar.entities.Address;
 import com.spring.rentACar.repositories.AddressRepository;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,7 +45,7 @@ public class AddressesController {
     }
 
     @PostMapping
-    public void add(@RequestBody AddAddressRequest addAddressRequest){
+    public void add(@RequestBody @Valid AddAddressRequest addAddressRequest){
         addressService.add(addAddressRequest);
     }
 
